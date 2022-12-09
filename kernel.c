@@ -1,9 +1,9 @@
 #include <stddef.h>
 #include <stdint.h>
 
-volatile uint32_t** core_1 = (void*)0xE0;
-volatile uint32_t** core_2 = (void*)0xE8;
-volatile uint32_t** core_3 = (void*)0xF0;
+volatile uint64_t** core_1 = (void*)0xE0;
+volatile uint64_t** core_2 = (void*)0xE8;
+volatile uint64_t** core_3 = (void*)0xF0;
 
 
 void _start_core_1(void* addr) {
