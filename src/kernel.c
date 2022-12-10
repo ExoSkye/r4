@@ -9,20 +9,18 @@ volatile uint64_t** core_3 = (void*)0xF0;
 
 
 void _start_core_1(void* addr) {
-    *core_1 = (uint32_t*)addr;
+    *core_1 = (uint64_t*)addr;
 }
 
 
 void _start_core_2(void* addr) {
-    *core_2 = (uint32_t*)addr;
+    *core_2 = (uint64_t*)addr;
 }
 
 
 void _start_core_3(void* addr) {
-    *core_3 = (uint32_t*)addr;
+    *core_3 = (uint64_t*)addr;
 }
-
-
 
 void kernel_main(uint64_t dtb_ptr32, uint64_t x1, uint64_t x2, uint64_t x3) {
     uint32_t reg;
@@ -32,16 +30,16 @@ void kernel_main(uint64_t dtb_ptr32, uint64_t x1, uint64_t x2, uint64_t x3) {
 
     switch ((reg >> 4) & 0xFFF) {
         case 0xD03:
-            board = "Raspberry Pi 3";
+            board = "Raspberry Pi 3\0";
             MMIO_BASE = 0x3F000000;
             break;
         case 0xD08:
-            board = "Raspberry Pi 4";
+            board = "Raspberry Pi 4\0";
             MMIO_BASE = 0xFE000000;
             break;
     }
     uart_init();
     uart_puts(board);
-
+    
     return;
 }

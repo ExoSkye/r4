@@ -14,9 +14,25 @@ kernel8.img: os.elf
 	$(OBJCPY) os.elf -O binary kernel8.img
 
 .PHONY: image kernel
+
 image: kernel8.img
 
 kernel: os.elf
 
+real_hardware: kernel8.img
+	mkdir -p staging
+	cp -v raspi_fw/boot/bcm2710-rpi-3-b.dtb staging
+	cp -v raspi_fw/boot/bcm2710-rpi-3-b-plus.dtb staging
+	cp -v raspi_fw/boot/bcm2710-rpi-cm3.dtb staging
+	cp -v raspi_fw/boot/bcm2711-rpi-4-b.dtb staging
+	cp -v raspi_fw/boot/bcm2711-rpi-400.dtb staging
+	cp -v raspi_fw/boot/bcm2711-rpi-cm4.dtb staging
+	cp -v raspi_fw/boot/bcm2711-rpi-cm4s.dtb staging
+	cp -v raspi_fw/boot/*.dat staging
+	cp -v raspi_fw/boot/*.elf staging
+	cp -v raspi_fw/boot/bootcode.bin staging
+	cp -v kernel8.img staging
+
 clean:
 	rm boot.o kernel.o os.elf kernel8.img
+	rm -rf staging

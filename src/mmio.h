@@ -1,6 +1,8 @@
 #ifndef MMIO_H
 #define MMIO_H
 
+#include <stdint.h>
+
 static uint32_t MMIO_BASE;
 
 static inline void mmio_write(uint32_t reg, uint32_t data)
