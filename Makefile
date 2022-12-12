@@ -47,12 +47,12 @@ kernel: $(BUILD_DIR)/kernel8.elf
 $(BUILD_DIR)/r4.img: $(BUILD_DIR)/kernel8.img src/config.txt third-party/raspi-firmware/boot/*
 	$(VERB) echo Building the image
 	
-	$(VERB) echo -- Making the image file \($(BUILD_DIR)/tmp.img\)
+	$(VERB) echo -- Making the image file \($(BUILD_DIR)/r4.img \)
 	$(VERB) dd if=/dev/zero of=$(BUILD_DIR)/tmp.img count=64 bs=1M
 	$(VERB) echo -e "unit: sectors\n/dev/hdc1 : Id=0c" | sfdisk $(BUILD_DIR)/tmp.img > /dev/null
 	$(VERB) mkfs.vfat -F 32 $(BUILD_DIR)/tmp.img > /dev/null
 	
-	$(VERB) echo -- Copying files to `$(BUILD_DIR)/staging`
+	$(VERB) echo -- Copying files to $(BUILD_DIR)/staging
 	$(VERB) mkdir -p $(BUILD_DIR)/staging
 	$(VERB) cp third-party/raspi-firmware/boot/bcm2710-rpi-3-b.dtb $(BUILD_DIR)/staging/
 	$(VERB) cp third-party/raspi-firmware/boot/bcm2710-rpi-3-b-plus.dtb $(BUILD_DIR)/staging/
